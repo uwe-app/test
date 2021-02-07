@@ -1,4 +1,4 @@
-BIN_UWE := uwe
+BIN_UWE ?= uwe
 TARGET := target
 
 clean:
@@ -6,16 +6,16 @@ clean:
 	@mkdir $(TARGET)
 
 getting-started:
-	@(cd $(TARGET) && uwe new basic-website)
+	@(cd $(TARGET) && $(BIN_UWE) new basic-website)
 	@(cd $(TARGET)/basic-website \
 		&& echo "Running dev server..." \
-		&& ../../dev-server.sh && sleep 2 \
+		&& BIN_UWE=$(BIN_UWE) ../../dev-server.sh && sleep 2 \
 		&& echo "Stopping dev server..." \
 		&& kill `cat dev-server.pid` \
-		&& uwe build)
+		&& $(BIN_UWE) build)
 
 using-javascript-transpiler:
-	@(cd $(TARGET) && uwe new esbuild-hook)
+	@(cd $(TARGET) && $(BIN_UWE) new esbuild-hook)
 	@(cd $(TARGET)/esbuild-hook \
 		&& cp -f ../../fixtures/esbuild-hook/package.json . \
 		&& yarn add esbuild --dev \
@@ -23,15 +23,15 @@ using-javascript-transpiler:
 		&& cp -f ../../fixtures/esbuild-hook/index.md ./site \
 		&& mkdir -p site/src \
 		&& cp -f ../../fixtures/esbuild-hook/main.js ./site/src \
-		&& uwe build --exec)
+		&& $(BIN_UWE) build --exec)
 
 adding-integration-tests:
-	@(cd $(TARGET) && uwe new test-project)
+	@(cd $(TARGET) && $(BIN_UWE) new test-project)
 	@(cd $(TARGET)/test-project \
-		&& uwe build \
+		&& $(BIN_UWE) build \
 		&& yarn add cypress --dev \
-		&& uwe task init-test \
-		&& uwe test)
+		&& $(BIN_UWE) task init-test \
+		&& $(BIN_UWE) test)
 
 tutorials: getting-started using-javascript-transpiler adding-integration-tests
 
