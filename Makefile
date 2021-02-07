@@ -5,26 +5,30 @@ clean:
 	@rm -rf $(TARGET)
 	@mkdir $(TARGET)
 
-integration-test-tutorial:
-	@(cd target && uwe new integration-test-tutorial)
-	@(cd target/integration-test-tutorial \
+getting-started:
+	@(cd $(TARGET) && uwe new basic-website)
+	@(cd $(TARGET)/basic-website && uwe build)
+
+using-javascript-transpiler:
+	@(cd $(TARGET) && uwe new esbuild-hook)
+	@(cd $(TARGET)/esbuild-hook \
+		&& cp -f ../../fixtures/esbuild-hook/package.json . \
+		&& yarn add esbuild --dev \
+		&& cp -f ../../fixtures/esbuild-hook/site.toml . \
+		&& cp -f ../../fixtures/esbuild-hook/index.md ./site \
+		&& mkdir -p site/src \
+		&& cp -f ../../fixtures/esbuild-hook/main.js ./site/src \
+		&& uwe build --exec)
+
+adding-integration-tests:
+	@(cd $(TARGET) && uwe new test-project)
+	@(cd $(TARGET)/test-project \
 		&& uwe build \
 		&& yarn add cypress --dev \
 		&& uwe task init-test \
 		&& uwe test)
 
-esbuild-hook-tutorial:
-	@(cd target && uwe new esbuild-hook-tutorial)
-	@(cd target/esbuild-hook-tutorial \
-		&& cp -f ../../fixtures/esbuild-hook-tutorial/package.json . \
-		&& yarn add esbuild --dev \
-		&& cp -f ../../fixtures/esbuild-hook-tutorial/site.toml . \
-		&& cp -f ../../fixtures/esbuild-hook-tutorial/index.md ./site \
-		&& mkdir -p site/src \
-		&& cp -f ../../fixtures/esbuild-hook-tutorial/main.js ./site/src \
-		&& uwe build --exec)
-
-tutorials: integration-test-tutorial esbuild-hook-tutorial
+tutorials: getting-started using-javascript-transpiler adding-integration-tests
 
 test: clean tutorials
 
