@@ -5,6 +5,16 @@ clean:
 	@rm -rf $(TARGET)
 	@mkdir $(TARGET)
 
+new-project-plugin:
+	@(cd $(TARGET) && $(UWE) new project-plugin std::blueprint::default)
+	@$(UWE) build $(TARGET)/project-plugin
+
+new-project-git:
+	@(cd $(TARGET) && $(UWE) new project-git --git https://github.com/uwe-app/blueprints --prefix=default)
+	@$(UWE) build $(TARGET)/project-git
+
+new: new-project-plugin new-project-git
+
 default:
 	@(cd $(TARGET) && $(UWE) new default-project)
 	@$(UWE) build $(TARGET)/default-project
@@ -52,6 +62,6 @@ adding-integration-tests:
 
 tutorials: getting-started using-javascript-transpiler adding-integration-tests
 
-test: clean blueprints tutorials
+test: clean new blueprints tutorials
 
 .PHONY: clean test blueprints tutorials
