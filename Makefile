@@ -7,7 +7,12 @@ clean:
 
 getting-started:
 	@(cd $(TARGET) && uwe new basic-website)
-	@(cd $(TARGET)/basic-website && uwe build)
+	@(cd $(TARGET)/basic-website \
+		&& echo "Running dev server..." \
+		&& ../../dev-server.sh && sleep 2 \
+		&& echo "Stopping dev server..." \
+		&& kill `cat dev-server.pid` \
+		&& uwe build)
 
 using-javascript-transpiler:
 	@(cd $(TARGET) && uwe new esbuild-hook)

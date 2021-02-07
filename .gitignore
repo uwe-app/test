@@ -1,4 +1,5 @@
 target
 *.bak
 *.zip
+*.pid
 *.lock
