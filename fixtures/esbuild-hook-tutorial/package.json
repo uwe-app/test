@@ -1,0 +1,13 @@
+{
+  "name": "@uwe/esbuild",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Integration demo for esbuild",
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild ${BUILD_SOURCE}/src/main.js --bundle --outfile=${BUILD_TARGET}/assets/scripts/main.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.8.20"
+  }
+}

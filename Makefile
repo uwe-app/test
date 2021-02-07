@@ -13,7 +13,18 @@ integration-test-tutorial:
 		&& uwe task init-test \
 		&& uwe test)
 
-tutorials: integration-test-tutorial
+esbuild-hook-tutorial:
+	@(cd target && uwe new esbuild-hook-tutorial)
+	@(cd target/esbuild-hook-tutorial \
+		&& cp -f ../../fixtures/esbuild-hook-tutorial/package.json . \
+		&& yarn add esbuild --dev \
+		&& cp -f ../../fixtures/esbuild-hook-tutorial/site.toml . \
+		&& cp -f ../../fixtures/esbuild-hook-tutorial/index.md ./site \
+		&& mkdir -p site/src \
+		&& cp -f ../../fixtures/esbuild-hook-tutorial/main.js ./site/src \
+		&& uwe build --exec)
+
+tutorials: integration-test-tutorial esbuild-hook-tutorial
 
 test: clean tutorials
 

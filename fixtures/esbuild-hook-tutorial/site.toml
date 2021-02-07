@@ -1,0 +1,15 @@
+lang = "en"
+host = "localhost"
+
+[dependencies]
+"std::core" = { version = "~4.1" , apply = {styles = ["**"]}}
+
+[script]
+src = "/assets/scripts/main.js"
+dynamic = true
+
+[[hooks.run]]
+path = "npm"
+args = ["run", "build"]
+files = ["src/*.js"]
+watch = true
