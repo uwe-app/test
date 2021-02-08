@@ -41,6 +41,7 @@ getting-started:
 		&& kill `cat dev-server.pid` \
 		&& $(UWE) build)
 
+# FIXME: use: uwe new blog blog - to create blog in workspace context
 create-workspace:
 	@(cd $(TARGET) && mkdir example.com)
 	@(cd $(TARGET)/example.com \
