@@ -41,6 +41,18 @@ getting-started:
 		&& kill `cat dev-server.pid` \
 		&& $(UWE) build)
 
+create-workspace:
+	@(cd $(TARGET) && mkdir example.com)
+	@(cd $(TARGET)/example.com \
+		&& $(UWE) new website \
+		&& $(UWE) new blog \
+		&& $(UWE) new docs \
+		&& cp -f ../../fixtures/workspace/site.toml . \
+		&& cp -f ../../fixtures/workspace/website.toml ./website/site.toml \
+		&& cp -f ../../fixtures/workspace/blog.toml ./blog/site.toml \
+		&& cp -f ../../fixtures/workspace/docs.toml ./docs/site.toml \
+		&& $(UWE) build)
+
 using-javascript-transpiler:
 	@(cd $(TARGET) && $(UWE) new esbuild-hook)
 	@(cd $(TARGET)/esbuild-hook \
@@ -60,7 +72,7 @@ adding-integration-tests:
 		&& $(UWE) task init-test \
 		&& $(UWE) test)
 
-tutorials: getting-started using-javascript-transpiler adding-integration-tests
+tutorials: getting-started create-workspace using-javascript-transpiler adding-integration-tests
 
 test: clean new blueprints tutorials
 

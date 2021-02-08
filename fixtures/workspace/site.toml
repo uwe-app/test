@@ -1,0 +1,6 @@
+[workspace]
+members = [
+  "website",
+  "blog",
+  "docs",
+]

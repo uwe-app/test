@@ -1,0 +1,14 @@
+lang = "en"
+host = "example.com"
+
+[dependencies."std::core"]
+version = "^5"
+
+[dependencies."std::core".apply]
+styles = ["**"]
+
+[dependencies."std::blueprint::default"]
+version = "1.1.2"
+[page.meta]
+description = "Website"
+keywords = "Vanilla, Website"
