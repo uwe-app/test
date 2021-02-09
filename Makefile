@@ -5,6 +5,50 @@ clean:
 	@rm -rf $(TARGET)
 	@mkdir $(TARGET)
 
+build-babel:
+	@(cd $(TARGET) && $(UWE) new build-babel build::babel)
+	@(cd $(TARGET)/build-babel \
+		&& npm install \
+		&& $(UWE) build --exec)
+
+build-esbuild:
+	@(cd $(TARGET) && $(UWE) new build-esbuild build::esbuild)
+	@(cd $(TARGET)/build-esbuild \
+		&& npm install \
+		&& $(UWE) build --exec)
+
+build-postcss:
+	@(cd $(TARGET) && $(UWE) new build-postcss build::postcss)
+	@(cd $(TARGET)/build-postcss \
+		&& npm install \
+		&& $(UWE) build --exec)
+
+build-sass:
+	@(cd $(TARGET) && $(UWE) new build-sass build::sass)
+	@(cd $(TARGET)/build-sass \
+		&& npm install \
+		&& $(UWE) build --exec)
+
+build-swc:
+	@(cd $(TARGET) && $(UWE) new build-swc build::swc)
+	@(cd $(TARGET)/build-swc \
+		&& npm install \
+		&& $(UWE) build --exec)
+
+build-tailwind-postcss:
+	@(cd $(TARGET) && $(UWE) new build-tailwind-postcss build::tailwind-postcss)
+	@(cd $(TARGET)/build-tailwind-postcss \
+		&& npm install \
+		&& $(UWE) build --exec)
+
+build-webpack:
+	@(cd $(TARGET) && $(UWE) new build-webpack build::webpack)
+	@(cd $(TARGET)/build-webpack \
+		&& npm install \
+		&& $(UWE) build --exec)
+
+build-tools: build-babel build-esbuild build-postcss build-sass build-swc build-tailwind-postcss build-webpack
+
 new-project-plugin:
 	@(cd $(TARGET) && $(UWE) new project-plugin std::blueprint::default)
 	@$(UWE) build $(TARGET)/project-plugin
