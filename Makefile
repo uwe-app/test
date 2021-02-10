@@ -6,43 +6,43 @@ clean:
 	@mkdir $(TARGET)
 
 build-babel:
-	@(cd $(TARGET) && $(UWE) new build-babel build::babel)
+	@(cd $(TARGET) && $(UWE) new build-babel cookbook::build::babel)
 	@(cd $(TARGET)/build-babel \
 		&& npm install \
 		&& $(UWE) build --exec)
 
 build-esbuild:
-	@(cd $(TARGET) && $(UWE) new build-esbuild build::esbuild)
+	@(cd $(TARGET) && $(UWE) new build-esbuild cookbook::build::esbuild)
 	@(cd $(TARGET)/build-esbuild \
 		&& npm install \
 		&& $(UWE) build --exec)
 
 build-postcss:
-	@(cd $(TARGET) && $(UWE) new build-postcss build::postcss)
+	@(cd $(TARGET) && $(UWE) new build-postcss cookbook::build::postcss)
 	@(cd $(TARGET)/build-postcss \
 		&& npm install \
 		&& $(UWE) build --exec)
 
 build-sass:
-	@(cd $(TARGET) && $(UWE) new build-sass build::sass)
+	@(cd $(TARGET) && $(UWE) new build-sass cookbook::build::sass)
 	@(cd $(TARGET)/build-sass \
 		&& npm install \
 		&& $(UWE) build --exec)
 
 build-swc:
-	@(cd $(TARGET) && $(UWE) new build-swc build::swc)
+	@(cd $(TARGET) && $(UWE) new build-swc cookbook::build::swc)
 	@(cd $(TARGET)/build-swc \
 		&& npm install \
 		&& $(UWE) build --exec)
 
 build-tailwind-postcss:
-	@(cd $(TARGET) && $(UWE) new build-tailwind-postcss build::tailwind-postcss)
+	@(cd $(TARGET) && $(UWE) new build-tailwind-postcss cookbook::build::tailwind-postcss)
 	@(cd $(TARGET)/build-tailwind-postcss \
 		&& npm install \
 		&& $(UWE) build --exec)
 
 build-webpack:
-	@(cd $(TARGET) && $(UWE) new build-webpack build::webpack)
+	@(cd $(TARGET) && $(UWE) new build-webpack cookbook::build::webpack)
 	@(cd $(TARGET)/build-webpack \
 		&& npm install \
 		&& $(UWE) build --exec)
@@ -89,9 +89,9 @@ getting-started:
 create-workspace:
 	@(cd $(TARGET) && mkdir example.com)
 	@(cd $(TARGET)/example.com \
-		&& $(UWE) new website \
-		&& $(UWE) new blog \
-		&& $(UWE) new docs \
+		&& $(UWE) new --bare website \
+		&& $(UWE) new --bare blog \
+		&& $(UWE) new --bare docs \
 		&& cp -f ../../fixtures/workspace/site.toml . \
 		&& cp -f ../../fixtures/workspace/website.toml ./website/site.toml \
 		&& cp -f ../../fixtures/workspace/blog.toml ./blog/site.toml \
